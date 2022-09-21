@@ -21,7 +21,7 @@ api = Api(app)
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 app.secret_key = secrets.token_urlsafe(16)
 app.config["JWT_EXPIRATION_DELTA"] = datetime.timedelta(seconds=1800)
-app.config['SQLALCHEMY_DATABASE_URI'] = f'postgresql://postgres:{DB_PASS}@localhost:5432/api'
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL',  f'postgresql://postgres:{DB_PASS}@localhost:5432/api')
 
 #app.config['JWT_AUTH_USERNAME_KEY']='email
 jwt = JWT(app, auth, identity)
